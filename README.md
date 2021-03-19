@@ -1,4 +1,8 @@
-### Hi there 👋
+### Что можно посмотреть:
+* [Лекции](https://github.com/dmitryweiner/lectures)
+* [Странный генератор звука](https://dmitryweiner.github.io/jouok/index.html)
+* [Игра для обучения детей](http://malyavka.dweiner.ru/)
+* [Учебный чат-сервер](https://github.com/dmitryweiner/mini-chat-server)
 
 <!--
 **dmitryweiner/dmitryweiner** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
