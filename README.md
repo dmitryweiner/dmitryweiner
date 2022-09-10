@@ -1,5 +1,6 @@
 ### Что можно посмотреть:
 * [**📚 Лекции по фронтенду, читаемые в ВКИ**](https://github.com/dmitryweiner/lectures/blob/main/README.md)
+* [**🤖 Лекции по Android (Kotlin), читаемые в ВКИ**](https://github.com/dmitryweiner/android-lectures/blob/master/README.md)
 * [Странный генератор звука](https://dmitryweiner.github.io/jouok/index.html)
 * [Игра для обучения детей](http://malyavka.dweiner.ru/)
 * [Учебный чат-сервер](https://github.com/dmitryweiner/mini-chat-server)
