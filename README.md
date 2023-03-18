@@ -1,4 +1,4 @@
-### Projects I proud of:
+### 🎉 Projects I proud of 🎉
 * [**📷 Sample web-application for storing and categorizing photos**](github.com/dmitryweiner/lost-and-found)
 * [**📚 Web development course with React.js, Node.js (RUS)**](https://github.com/dmitryweiner/web-lectures/blob/main/README.md)
 * [**🤖 Kotlin Android development course (RUS)**](https://github.com/dmitryweiner/android-lectures/blob/master/README.md)
