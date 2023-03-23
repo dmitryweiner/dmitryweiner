@@ -1,5 +1,5 @@
 ### 🎉 Projects I proud of 🎉
-* [**📷 Lost&Found: web-application for storing and categorizing photos**](github.com/dmitryweiner/lost-and-found)
+* [**📷 Lost&Found: web-application for storing and categorizing photos**](https://github.com/dmitryweiner/lost-and-found)
 * [**📚 Web development course with React.js, Node.js (RUS)**](https://github.com/dmitryweiner/web-lectures/blob/main/README.md)
 * [**🤖 Kotlin Android development course (RUS)**](https://github.com/dmitryweiner/android-lectures/blob/master/README.md)
 * [Meditative sound generator](https://dmitryweiner.github.io/jouok/index.html)
@@ -8,7 +8,7 @@
 * [TODO server with REST full of bugs](https://github.com/dmitryweiner/todo-server)
 
 ### Что можно посмотреть:
-* [**📷 Веб-приложение для хранения и категоризации фото**](github.com/dmitryweiner/lost-and-found)
+* [**📷 Веб-приложение для хранения и категоризации фото**](https://github.com/dmitryweiner/lost-and-found)
 * [**📚 Лекции по веб-разработке (React.js, Node.js)**](https://github.com/dmitryweiner/web-lectures/blob/main/README.md)
 * [**🤖 Лекции по Android (Kotlin)**](https://github.com/dmitryweiner/android-lectures/blob/master/README.md)
 * [Странный генератор звука](https://dmitryweiner.github.io/jouok/index.html)
