@@ -1,37 +1,52 @@
-# Hi, I'm Dmitry 👋
+# Dmitry Weiner
 
-I build things where code meets **sound**, **image** and **clay**, and I teach web and Android development.
+**Frontend Developer** · React · TypeScript
 
-🌐 **[See all my projects on one page →](https://dmitryweiner.github.io/dmitryweiner/)**
+I build web applications with **React** and **TypeScript**, from interactive interfaces and PWAs to real-time audio and 3D graphics in the browser. I also teach web and Android development.
 
----
+I practice **AI-assisted, agentic software development**: my projects are built together with AI coding agents (Claude Code), guided by written plans, project instructions (`CLAUDE.md` / `AGENTS.md`) and automated tests that keep every change verifiable.
 
-## 🎨🎵 Synesthesia
+🌐 **[Project showcase](https://dmitryweiner.github.io/dmitryweiner/)**
 
-**Sound and image generated together from one point in a ~500-gene parameter space, and steered by you.**
-Press 👍 when you like where it's going, 👎 when you don't, and the search follows. 🎲 jumps somewhere new, ↩ undoes.
-The picture is a Gray–Scott reaction-diffusion simulation that *listens*: it breathes with the loudness, flashes on every hit and grows new patterns on onsets.
+## 🛠 Tech stack
 
-| | Project | What it is |
+| Area | Technologies |
+|---|---|
+| **Frontend** | React, TypeScript, JavaScript, HTML/CSS, Sass, Bootstrap |
+| **Graphics & audio** | WebGL, Three.js, Canvas, Web Audio API (AudioWorklet), Web Workers |
+| **Tooling** | Vite, ESLint, Prettier, PWA (Workbox), i18next |
+| **Testing** | Vitest, React Testing Library, Playwright |
+| **Also** | Node.js, Rust, WebAssembly, Kotlin / Android |
+| **AI workflow** | Claude Code, agentic development, spec- and test-driven iteration |
+
+## 🚀 Featured projects
+
+### 🧠 [Brain Trainer](https://github.com/dmitryweiner/brain-trainer) · [Live demo](https://dmitryweiner.github.io/brain-trainer)
+
+A set of 12 mini-games for training memory, attention, reaction and spatial thinking, with adaptive difficulty.
+Installable offline-first PWA, progress sync across devices, four languages including right-to-left Hebrew.
+
+`React` `TypeScript` `Vite` `Bootstrap` `react-i18next` `PWA` `Vitest` `React Testing Library` `Playwright`
+
+### 🏺 [ClayForm](https://github.com/dmitryweiner/clayform) · [Live demo](https://dmitryweiner.github.io/clayform/)
+
+A parametric CAD tool for ceramics: generates pottery and slip-casting molds from real dimensions and exports STL for 3D printing.
+Includes procedural surface relief, roller-stamp patterns and solid modelling of the molds in the browser.
+
+`TypeScript` `Three.js` `manifold-3d (WASM)` `Vite` `Vitest` `Playwright`
+
+### 🎨 Synesthesia
+
+A generative audio-visual system: sound and image are produced together from a single point in a ~500-parameter space, and the user steers the search with like/dislike feedback. One Rust core is shared by the web, Android and desktop applications.
+
+| Repository | Description | Stack |
 |---|---|---|
-| 🧬 | [**synesthesia-core**](https://github.com/dmitryweiner/synesthesia-core) | The shared engine in Rust: 23 sound generators, FX chain, LFOs, the picture's simulation and the directed search. Deterministic, no I/O, shared by every app via UniFFI and wasm-bindgen |
-| 🌐 | [**synesthesia**](https://github.com/dmitryweiner/synesthesia) | The web app (TypeScript, Web Audio, WebGL). **[▶ Try it live](https://dmitryweiner.github.io/synesthesia/)** |
-| 🤖 | [**synesthesia-android**](https://github.com/dmitryweiner/synesthesia-android) | The Android app (Kotlin + the Rust core). Keeps playing with the screen off, steer it from the lock screen. **[📦 Download APK](https://github.com/dmitryweiner/synesthesia-android/releases/latest)** |
-| 🖥️ | [**synesthesia-rust**](https://github.com/dmitryweiner/synesthesia-rust) | A native terminal app: the sound in full, the picture in half-block characters, steered from the keyboard |
+| [synesthesia](https://github.com/dmitryweiner/synesthesia) · [Live demo](https://dmitryweiner.github.io/synesthesia/) | Web application: real-time audio synthesis and a GPU reaction-diffusion visualisation | TypeScript, Web Audio (AudioWorklet), WebGL, Web Workers, Vite |
+| [synesthesia-core](https://github.com/dmitryweiner/synesthesia-core) | Shared engine and specification: sound generators, effects, modulation, search | Rust, WebAssembly (wasm-bindgen), UniFFI |
+| [synesthesia-android](https://github.com/dmitryweiner/synesthesia-android) · [APK](https://github.com/dmitryweiner/synesthesia-android/releases/latest) | Android application with background playback | Kotlin, OpenGL ES, Rust |
+| [synesthesia-rust](https://github.com/dmitryweiner/synesthesia-rust) | Native terminal application | Rust |
 
-## 🏺 [ClayForm](https://github.com/dmitryweiner/clayform)
+## 📚 Teaching *(courses in Russian)*
 
-**Pottery and slip-casting molds: from parameters to STL.**
-Pick a classic form (pot, bowl, cup, vase), set real dimensions in millimetres, add relief waves and roller-stamped bands, and get a file to 3D-print in clay or a mold for slip casting.
-**[▶ Open ClayForm](https://dmitryweiner.github.io/clayform/)**
-
-## 🧠 [Brain Trainer](https://github.com/dmitryweiner/brain-trainer)
-
-**12 mini-games for memory, attention, reaction and spatial thinking, for all ages.**
-Difficulty adapts to the player, works offline, syncs across devices, speaks 🇬🇧 🇷🇺 🇮🇱 🇺🇦.
-**[▶ Play now](https://dmitryweiner.github.io/brain-trainer)**
-
-## 📚 Courses *(in Russian 🇷🇺)*
-
-* [**🕸️ Web development: React.js, Node.js**](https://github.com/dmitryweiner/web-lectures/blob/main/README.md): frontend and backend, from the basics to Redux and TypeScript ([slides](https://dmitryweiner.github.io/web-lectures/))
-* [**🤖 Android development with Kotlin**](https://github.com/dmitryweiner/android-lectures/blob/master/README.md)
+* [**Web development: React.js and Node.js**](https://github.com/dmitryweiner/web-lectures/blob/main/README.md): frontend and backend development, including Redux and TypeScript ([slides](https://dmitryweiner.github.io/web-lectures/))
+* [**Android development with Kotlin**](https://github.com/dmitryweiner/android-lectures/blob/master/README.md)
