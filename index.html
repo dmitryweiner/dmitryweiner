@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dmitry Weiner</title>
+<meta name="description" content="Dmitry Weiner: Synesthesia (sound and image steered by you), ClayForm (pottery from parameters to STL), Brain Trainer and courses on web and Android development.">
+<meta property="og:title" content="Dmitry Weiner">
+<meta property="og:description" content="Frontend developer: Synesthesia, ClayForm, Brain Trainer and courses on web and Android development.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07060f;
+    --bg-2: #0e0c1d;
+    --card: rgba(255, 255, 255, 0.04);
+    --card-hover: rgba(255, 255, 255, 0.07);
+    --line: rgba(255, 255, 255, 0.10);
+    --text: #f3f0ff;
+    --muted: #a9a3c4;
+    --violet: #8b5cf6;
+    --pink: #ec4899;
+    --amber: #fbbf24;
+    --cyan: #22d3ee;
+    --clay: #e07a4f;
+    --green: #34d399;
+    --radius: 22px;
+    --display: "Unbounded", system-ui, sans-serif;
+    --body: "Inter", system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  #rd {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: -2;
+    cursor: crosshair;
+  }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(7, 6, 15, 0.75), rgba(7, 6, 15, 0.3) 70%),
+      linear-gradient(to bottom, transparent 70%, var(--bg));
+  }
+  @media (max-width: 720px) {
+    .hero::after {
+      background:
+        radial-gradient(ellipse 90% 45% at 50% 50%, rgba(7, 6, 15, 0.85), rgba(7, 6, 15, 0.3) 80%),
+        linear-gradient(to bottom, transparent 70%, var(--bg));
+    }
+  }
+  .hero-inner { text-align: center; padding: 96px 16px; pointer-events: none; }
+  .hero-inner a, .hero-inner button { pointer-events: auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px;
+    background: rgba(7, 6, 15, 0.55); backdrop-filter: blur(8px);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+  h1 {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(44px, 11vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 28px 0 8px;
+    background: linear-gradient(100deg, #fff 20%, #f9c3ff 45%, #ffd27a 70%, #fff 95%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    animation: shimmer 8s ease-in-out infinite;
+    text-shadow: 0 0 80px rgba(236, 72, 153, 0.25);
+  }
+  @keyframes shimmer { 50% { background-position: 100% 0; } }
+  .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(10px);
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.12); }
+  .btn.primary {
+    border: none; color: #120a1f;
+    background: linear-gradient(90deg, var(--amber), var(--pink));
+    box-shadow: 0 10px 40px -10px rgba(236, 72, 153, 0.7);
+  }
+  .btn.primary:hover { box-shadow: 0 14px 50px -8px rgba(236, 72, 153, 0.9); }
+  .hint {
+    position: absolute; bottom: 28px; left: 0; right: 0;
+    text-align: center; font-family: var(--mono); font-size: 12px;
+    color: var(--muted); letter-spacing: 0.06em; pointer-events: none;
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 110px 0 40px; }
+  .kicker {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 14px;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(34px, 6vw, 64px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    margin: 0 0 20px;
+  }
+  .lead { font-size: clamp(17px, 2vw, 20px); color: #d6d0ee; max-width: 760px; margin: 0; }
+  .grad-syn { background: linear-gradient(90deg, var(--violet), var(--pink), var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad-clay { background: linear-gradient(90deg, #f4a261, var(--clay), #b5523b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad-brain { background: linear-gradient(90deg, var(--cyan), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: transform 0.25s, background 0.25s, border-color 0.25s;
+  }
+  a.card { display: block; text-decoration: none; }
+  a.card:hover { transform: translateY(-4px); background: var(--card-hover); border-color: rgba(255, 255, 255, 0.22); }
+  .card h3 { font-family: var(--display); font-weight: 500; font-size: 20px; margin: 10px 0 8px; letter-spacing: -0.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .card .icon { font-size: 30px; line-height: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .tag {
+    font-family: var(--mono); font-size: 12px;
+    padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--line); color: #cfc8ea;
+  }
+  .arrow { position: absolute; top: 22px; right: 24px; color: var(--muted); transition: transform 0.25s, color 0.25s; }
+  a.card:hover .arrow { transform: translate(3px, -3px); color: #fff; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .links .btn { padding: 10px 16px; font-size: 14px; }
+
+  /* Synesthesia */
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 30px 0 0; }
+  .ctl {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 16px 10px 12px; border-radius: 14px;
+    background: var(--card); border: 1px solid var(--line);
+    font-size: 15px; color: #ddd7f5;
+  }
+  .ctl span { font-size: 22px; }
+  .syn-grid { display: grid; gap: 16px; margin-top: 44px; grid-template-columns: 1fr; }
+  @media (min-width: 900px) {
+    .syn-grid { grid-template-columns: repeat(3, 1fr); }
+    .syn-grid .core { grid-column: 1 / -1; }
+  }
+  .core {
+    background:
+      linear-gradient(var(--bg-2), var(--bg-2)) padding-box,
+      linear-gradient(120deg, var(--violet), var(--pink), var(--amber)) border-box;
+    border: 1.5px solid transparent;
+    display: grid; gap: 24px; align-items: center;
+  }
+  @media (min-width: 900px) { .core { grid-template-columns: 1.1fr 1fr; padding: 34px; } }
+  .core h3 { font-size: 26px; }
+  .core .feeds { display: grid; gap: 8px; font-family: var(--mono); font-size: 13px; color: #cfc8ea; }
+  .feed { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); }
+  .feed i { font-style: normal; color: var(--muted); margin-left: auto; }
+  .term {
+    margin-top: 16px;
+    font-family: var(--mono); font-size: 10.5px; line-height: 1.35;
+    color: #c4b5fd; background: #05040b; border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px; overflow: hidden; white-space: pre;
+  }
+  .term .hl { color: var(--amber); }
+  .term .pk { color: var(--pink); }
+
+  /* split layout */
+  .split { display: grid; gap: 40px; align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: 64px; } .split.rev > :first-child { order: 2; } }
+  .stage {
+    position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 520px; margin: 0 auto;
+    border-radius: 32px; border: 1px solid var(--line); overflow: hidden;
+  }
+  .stage canvas { width: 100%; height: 100%; display: block; }
+  .stage-label {
+    position: absolute; left: 18px; bottom: 16px;
+    font-family: var(--mono); font-size: 13px; color: #f4c7b3;
+    transition: opacity 0.4s;
+  }
+  .clay-stage { background: radial-gradient(circle at 50% 40%, #2a1610, #0d0705 75%); }
+  .feature-list { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 12px; }
+  .feature-list li { display: flex; gap: 12px; color: #d6d0ee; }
+  .feature-list li span:first-child { font-size: 20px; line-height: 1.4; }
+
+  /* Brain trainer mini game */
+  .brain-stage {
+    background: radial-gradient(circle at 50% 30%, #0c2a2e, #061214 75%);
+    display: flex; flex-direction: column; padding: 20px; gap: 14px;
+  }
+  .game-bar { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 13px; color: #a7f3d0; }
+  .score { font-size: 15px; color: #fff; }
+  .board { flex: 1; display: grid; gap: 8px; }
+  .tile {
+    display: grid; place-items: center;
+    font-size: clamp(20px, 5vw, 34px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px; cursor: pointer; user-select: none;
+    transition: transform 0.15s, background 0.15s;
+    padding: 0; color: inherit; font-family: inherit;
+  }
+  .tile:hover { transform: scale(1.06); background: rgba(255, 255, 255, 0.1); }
+  .tile.win { background: rgba(52, 211, 153, 0.35); transform: scale(1.12); }
+  .tile.miss { animation: shake 0.3s; background: rgba(236, 72, 153, 0.3); }
+  @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+  .games { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .games span {
+    font-size: 14px; padding: 6px 12px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--line); color: #d6d0ee;
+  }
+
+  /* Courses */
+  .courses { display: grid; gap: 16px; margin-top: 40px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .courses { grid-template-columns: 1fr 1fr; } }
+  .ru {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 12px;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(251, 191, 36, 0.12); color: var(--amber);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+  .course { padding: 30px; }
+  .course .icon { font-size: 44px; }
+
+  footer {
+    margin-top: 110px; padding: 48px 0 60px;
+    border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 15px;
+  }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+  .me { display: flex; align-items: center; gap: 14px; }
+  .me img { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--line); }
+  .me b { color: var(--text); display: block; font-family: var(--display); font-weight: 500; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    h1, .dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="rd" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Frontend developer</span>
+    <h1>Dmitry<br>Weiner</h1>
+    <div class="cta">
+      <a class="btn primary" href="#synesthesia">✨ Explore projects</a>
+      <a class="btn" href="https://github.com/dmitryweiner">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="hint">✦ drag across the pattern: it grows where you touch</div>
+</header>
+
+<main>
+  <!-- ================= Synesthesia ================= -->
+  <section id="synesthesia">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="kicker">01 / flagship · 4 repositories</p>
+        <h2>🎨🎵 <span class="grad-syn">Synesthesia</span></h2>
+        <p class="lead">Sound and image generated together from <b>one point in a ~500-gene space</b>, and steered by you. The picture is a reaction-diffusion simulation (like the one up top) that <i>listens</i>: it breathes with loudness, flashes on every hit and grows new patterns on onsets.</p>
+        <div class="controls">
+          <div class="ctl"><span>👍</span>More of this</div>
+          <div class="ctl"><span>👎</span>Not this</div>
+          <div class="ctl"><span>🎲</span>Surprise me</div>
+          <div class="ctl"><span>↩</span>Undo</div>
+        </div>
+      </div>
+
+      <div class="syn-grid">
+        <div class="card core reveal">
+          <div>
+            <div class="icon">🧬</div>
+            <h3>synesthesia-core</h3>
+            <p>The shared engine in Rust: 23 sound generators (FM, Lorenz chaos, logistic map, Shepard tone, tanpura, singing bowl…), an FX chain, LFOs, the Gray–Scott picture and the directed search. Deterministic, no I/O, one source of truth for every app.</p>
+            <div class="tags"><span class="tag">Rust</span><span class="tag">UniFFI</span><span class="tag">wasm-bindgen</span><span class="tag">DSP</span></div>
+            <div class="links"><a class="btn" href="https://github.com/dmitryweiner/synesthesia-core">Source ↗</a></div>
+          </div>
+          <div class="feeds" aria-label="Apps built on the core">
+            <div class="feed">🌐 → web <i>wasm</i></div>
+            <div class="feed">🤖 → android <i>Kotlin via UniFFI</i></div>
+            <div class="feed">🖥️ → terminal <i>native crate</i></div>
+            <div class="feed">🍏 → iOS <i>planned</i></div>
+          </div>
+        </div>
+
+        <a class="card reveal" href="https://github.com/dmitryweiner/synesthesia">
+          <span class="arrow">↗</span>
+          <div class="icon">🌐</div>
+          <h3>Web app</h3>
+          <p>Runs in the browser: Web Audio worklets, WebGL picture, a "scout" that pre-renders candidates and picks the most fractal-sounding one. Save and share any point with a short link.</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Web Audio</span><span class="tag">WebGL</span></div>
+        </a>
+        <a class="card reveal" href="https://github.com/dmitryweiner/synesthesia-android">
+          <span class="arrow">↗</span>
+          <div class="icon">🤖</div>
+          <h3>Android app</h3>
+          <p>Keeps playing with the screen off. Steer the search from the notification and lock screen; the picture runs on OpenGL ES and you can paint into it with a finger.</p>
+          <div class="tags"><span class="tag">Kotlin</span><span class="tag">Rust core</span><span class="tag">OpenGL ES</span></div>
+        </a>
+        <a class="card reveal" href="https://github.com/dmitryweiner/synesthesia-rust">
+          <span class="arrow">↗</span>
+          <div class="icon">🖥️</div>
+          <h3>Terminal app</h3>
+          <p>For machines where the browser can't keep up: the sound in full, the picture in half-block characters.</p>
+<div class="term" aria-hidden="true">┌ synesthesia — <span class="hl">Bell spots</span> ─────── ♪ ┐
+│ loud <span class="pk">████████▏</span>······  hits 14 │
+│ ▂▃▅▇█▇▅▃▂▁▂▃▄▅▆▇█▇▆▅▄▃▂▁▂▃▄ │
+│ [l] like  [d] dislike  [r] 🎲 │
+└──────────────────────────────┘</div>
+          <div class="tags"><span class="tag">Rust</span><span class="tag">TUI</span></div>
+        </a>
+      </div>
+
+      <div class="links reveal" style="margin-top:28px">
+        <a class="btn primary" href="https://dmitryweiner.github.io/synesthesia/">▶ Try it live</a>
+        <a class="btn" href="https://github.com/dmitryweiner/synesthesia-android/releases/latest">📦 Download Android APK</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ClayForm ================= -->
+  <section id="clayform">
+    <div class="wrap split">
+      <div class="reveal">
+        <div class="stage clay-stage">
+          <canvas id="vessel" aria-label="Animated pottery vessel morphing between shapes" role="img"></canvas>
+          <div class="stage-label" id="vessel-label">amphora</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="kicker">02 / pottery × geometry</p>
+        <h2>🏺 <span class="grad-clay">ClayForm</span></h2>
+        <p class="lead">Pottery and slip-casting molds, <b>from parameters to STL</b>. Pick a classic form, set real dimensions in millimetres, decorate it, and get a file to 3D-print in clay.</p>
+        <ul class="feature-list">
+          <li><span>🫖</span><span>Four families from historical references: pot, bowl, cup, vase (amphora, krater, kylix, skyphos…)</span></li>
+          <li><span>〰️</span><span>Relief waves along the height, around the axis or in a spiral, woven or modulated together</span></li>
+          <li><span>🛞</span><span>Roller-stamp bands: rope, zigzag, six kinds of Greek meander, or your own picture</span></li>
+          <li><span>🧱</span><span>Exports the vessel itself or the plaster mold for slip casting</span></li>
+        </ul>
+        <div class="links">
+          <a class="btn primary" href="https://dmitryweiner.github.io/clayform/">▶ Open ClayForm</a>
+          <a class="btn" href="https://github.com/dmitryweiner/clayform">Source ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Brain Trainer ================= -->
+  <section id="brain">
+    <div class="wrap split rev">
+      <div class="reveal">
+        <div class="stage brain-stage">
+          <div class="game-bar"><span>🔍 Odd One Out: tap the different one</span><span class="score" id="score">0</span></div>
+          <div class="board" id="board"></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="kicker">03 / for all ages</p>
+        <h2>🧠 <span class="grad-brain">Brain Trainer</span></h2>
+        <p class="lead"><b>12 mini-games</b> for memory, attention, reaction and spatial thinking. Difficulty adapts to the player, it works offline and syncs across devices. Try a quick round of Odd One Out 🎯</p>
+        <div class="games">
+          <span>🐰 Reaction race</span><span>🎨 Color Tap</span><span>🔍 Odd One Out</span><span>🃏 Memory Flip</span>
+          <span>⏮️ N-Back</span><span>📞 Phone Recall</span><span>🔎 Emoji Hunt</span><span>+5 more</span>
+        </div>
+        <p class="lead" style="margin-top:20px;font-size:16px">Speaks 🇬🇧 English · 🇷🇺 Русский · 🇮🇱 עברית · 🇺🇦 Українська</p>
+        <div class="links">
+          <a class="btn primary" href="https://dmitryweiner.github.io/brain-trainer">▶ Play now</a>
+          <a class="btn" href="https://github.com/dmitryweiner/brain-trainer">Source ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Courses ================= -->
+  <section id="courses">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="kicker">04 / teaching</p>
+        <h2>📚 Courses</h2>
+        <p class="lead">Full lecture courses I teach, with slides and exercises. <span class="ru">🇷🇺 in Russian</span></p>
+      </div>
+      <div class="courses">
+        <a class="card course reveal" href="https://github.com/dmitryweiner/web-lectures/blob/main/README.md">
+          <span class="arrow">↗</span>
+          <div class="icon">🕸️</div>
+          <h3>Web development</h3>
+          <p>Frontend with React.js and backend with Node.js: from HTML basics to Redux and TypeScript.</p>
+          <div class="tags"><span class="ru">🇷🇺 RU</span><span class="tag">React</span><span class="tag">Redux</span><span class="tag">Node.js</span><span class="tag">TypeScript</span></div>
+        </a>
+        <a class="card course reveal" href="https://github.com/dmitryweiner/android-lectures/blob/master/README.md">
+          <span class="arrow">↗</span>
+          <div class="icon">🤖</div>
+          <h3>Android development</h3>
+          <p>Building Android apps in Kotlin, from the first activity onwards.</p>
+          <div class="tags"><span class="ru">🇷🇺 RU</span><span class="tag">Kotlin</span><span class="tag">Android</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="me">
+      <img src="https://github.com/dmitryweiner.png?size=104" alt="" width="52" height="52">
+      <div><b>Dmitry Weiner</b>Made by hand, with a pinch of reaction-diffusion.</div>
+    </div>
+    <a class="btn" href="https://github.com/dmitryweiner">github.com/dmitryweiner ↗</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Gray–Scott reaction-diffusion hero ---------- */
+  const cv = document.getElementById("rd");
+  const ctx = cv.getContext("2d");
+  const CELL = 4;
+  let W, H, u, v, u2, v2, img, off, offCtx, lut;
+
+  // palette: night → indigo → violet → muted plum (kept dark so the text stays on top)
+  const stops = [[0, [7, 6, 15]], [0.3, [22, 14, 48]], [0.6, [62, 34, 118]], [0.85, [118, 48, 112]], [1, [168, 82, 96]]];
+  lut = new Uint8ClampedArray(256 * 3);
+  for (let i = 0; i < 256; i++) {
+    const t = i / 255;
+    let j = 0;
+    while (j < stops.length - 2 && t > stops[j + 1][0]) j++;
+    const [t0, c0] = stops[j], [t1, c1] = stops[j + 1];
+    const k = (t - t0) / (t1 - t0);
+    for (let c = 0; c < 3; c++) lut[i * 3 + c] = c0[c] + (c1[c] - c0[c]) * k;
+  }
+
+  function seed(cx, cy, r) {
+    for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++) {
+      if (x * x + y * y > r * r) continue;
+      const xx = (cx + x + W) % W, yy = (cy + y + H) % H;
+      const i = yy * W + xx;
+      u[i] = 0.5; v[i] = 0.25 + Math.random() * 0.1;
+    }
+  }
+
+  function init() {
+    const r = cv.getBoundingClientRect();
+    W = Math.max(60, Math.round(r.width / CELL));
+    H = Math.max(60, Math.round(r.height / CELL));
+    const n = W * H;
+    u = new Float32Array(n).fill(1); v = new Float32Array(n);
+    u2 = new Float32Array(n); v2 = new Float32Array(n);
+    off = document.createElement("canvas"); off.width = W; off.height = H;
+    offCtx = off.getContext("2d");
+    img = offCtx.createImageData(W, H);
+    cv.width = W * 2; cv.height = H * 2;
+    const count = Math.round(n / 900) + 6;
+    for (let s = 0; s < count; s++) seed((Math.random() * W) | 0, (Math.random() * H) | 0, 3 + ((Math.random() * 4) | 0));
+  }
+
+  function step() {
+    // the "coral" preset: grows into a labyrinth that settles and then barely moves
+    const f = 0.0545, k = 0.062;
+    for (let y = 0; y < H; y++) {
+      const ym = ((y - 1 + H) % H) * W, y0 = y * W, yp = ((y + 1) % H) * W;
+      for (let x = 0; x < W; x++) {
+        const xm = (x - 1 + W) % W, xp = (x + 1) % W;
+        const i = y0 + x;
+        const U = u[i], V = v[i];
+        const lu = 0.2 * (u[ym + x] + u[yp + x] + u[y0 + xm] + u[y0 + xp]) +
+                   0.05 * (u[ym + xm] + u[ym + xp] + u[yp + xm] + u[yp + xp]) - U;
+        const lv = 0.2 * (v[ym + x] + v[yp + x] + v[y0 + xm] + v[y0 + xp]) +
+                   0.05 * (v[ym + xm] + v[ym + xp] + v[yp + xm] + v[yp + xp]) - V;
+        const uvv = U * V * V;
+        u2[i] = U + (lu - uvv + f * (1 - U));
+        v2[i] = V + (0.5 * lv + uvv - (f + k) * V);
+      }
+    }
+    [u, u2] = [u2, u]; [v, v2] = [v2, v];
+  }
+
+  function draw() {
+    const d = img.data;
+    for (let i = 0, n = W * H; i < n; i++) {
+      let t = (v[i] * 1.8 + (1 - u[i]) * 0.4);
+      t = t < 0 ? 0 : t > 1 ? 1 : t;
+      const c = (t * 255) | 0;
+      d[i * 4] = lut[c * 3]; d[i * 4 + 1] = lut[c * 3 + 1]; d[i * 4 + 2] = lut[c * 3 + 2]; d[i * 4 + 3] = 255;
+    }
+    offCtx.putImageData(img, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(off, 0, 0, cv.width, cv.height);
+  }
+
+  let pointer = null;
+  function toGrid(e) {
+    const r = cv.getBoundingClientRect();
+    return [((e.clientX - r.left) / r.width * W) | 0, ((e.clientY - r.top) / r.height * H) | 0];
+  }
+  const hero = document.querySelector(".hero");
+  hero.addEventListener("pointermove", e => { pointer = toGrid(e); });
+  hero.addEventListener("pointerdown", e => { const [x, y] = toGrid(e); seed(x, y, 6); });
+  hero.addEventListener("pointerleave", () => { pointer = null; });
+
+  let heroVisible = true, raf = 0;
+  new IntersectionObserver(([en]) => {
+    heroVisible = en.isIntersecting;
+    if (heroVisible && !reduced && !raf) raf = requestAnimationFrame(loop);
+  }).observe(hero);
+
+  function loop() {
+    raf = 0;
+    if (!heroVisible) return;
+    if (pointer) seed(pointer[0], pointer[1], 2);
+    for (let s = 0; s < 3; s++) step();
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+
+  init();
+  if (reduced) { for (let s = 0; s < 2500; s++) step(); draw(); }
+  else { for (let s = 0; s < 1500; s++) step(); draw(); raf = requestAnimationFrame(loop); }
+
+  let rt;
+  addEventListener("resize", () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      const r = cv.getBoundingClientRect();
+      if (Math.abs(Math.round(r.width / CELL) - W) < 8 && Math.abs(Math.round(r.height / CELL) - H) < 8) return;
+      init();
+      for (let s = 0; s < (reduced ? 2500 : 1500); s++) step();
+      draw();
+    }, 250);
+  });
+
+  /* ---------- ClayForm: a vessel on a turning wheel ---------- */
+  const vc = document.getElementById("vessel");
+  const vx = vc.getContext("2d");
+  const label = document.getElementById("vessel-label");
+  // radii from foot to rim (normalised), height relative to the stage
+  const shapes = [
+    { name: "amphora", h: 0.78, r: [0.22, 0.30, 0.62, 0.70, 0.40, 0.20, 0.30] },
+    { name: "bowl",    h: 0.36, r: [0.30, 0.38, 0.62, 0.78, 0.88, 0.94, 0.98] },
+    { name: "krynka",  h: 0.66, r: [0.40, 0.48, 0.64, 0.66, 0.52, 0.42, 0.48] },
+    { name: "kylix",   h: 0.42, r: [0.24, 0.12, 0.10, 0.40, 0.78, 0.92, 0.96] },
+    { name: "mug",     h: 0.56, r: [0.46, 0.50, 0.53, 0.54, 0.55, 0.56, 0.57] },
+  ];
+  const HOLD = 2600, MORPH = 1600;
+
+  function profile(rs, t) {
+    // Catmull–Rom through equally spaced knots
+    const n = rs.length - 1, p = t * n, i = Math.min(n - 1, Math.floor(p)), f = p - i;
+    const p0 = rs[Math.max(0, i - 1)], p1 = rs[i], p2 = rs[i + 1], p3 = rs[Math.min(n, i + 2)];
+    return 0.5 * (2 * p1 + (-p0 + p2) * f + (2 * p0 - 5 * p1 + 4 * p2 - p3) * f * f + (-p0 + 3 * p1 - 3 * p2 + p3) * f * f * f);
+  }
+  const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+  function sizeVessel() {
+    const r = vc.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    vc.width = r.width * dpr; vc.height = r.height * dpr;
+  }
+  sizeVessel(); addEventListener("resize", sizeVessel);
+
+  let vesselVisible = false, vraf = 0, t0 = performance.now(), lastIdx = -1;
+  new IntersectionObserver(([en]) => {
+    vesselVisible = en.isIntersecting;
+    if (vesselVisible && !vraf) vraf = requestAnimationFrame(drawVessel);
+  }).observe(vc);
+
+  function drawVessel(now) {
+    vraf = 0;
+    if (!vesselVisible) return;
+    const el = reduced ? 0 : now - t0;
+    const cycle = HOLD + MORPH, idx = Math.floor(el / cycle) % shapes.length;
+    const local = el % cycle, m = local < HOLD ? 0 : ease((local - HOLD) / MORPH);
+    const A = shapes[idx], B = shapes[(idx + 1) % shapes.length];
+    if (idx !== lastIdx) { lastIdx = idx; label.textContent = A.name; }
+    label.style.opacity = m > 0.05 && m < 0.95 ? 0 : 1;
+    if (m >= 0.95) label.textContent = B.name;
+    const rs = A.r.map((r, i) => r + (B.r[i] - r) * m);
+    const hh = A.h + (B.h - A.h) * m;
+
+    const w = vc.width, h = vc.height, cx = w / 2;
+    const R = w * 0.36, top = h * (0.5 - hh / 2) + h * 0.02, height = h * hh;
+    const base = top + height, tilt = 0.22;
+    const rot = el * 0.0006;
+    const relief = 0.035 * (0.5 + 0.5 * Math.sin(el * 0.0005));
+    const radius = (t, th) => {
+      const zone = Math.max(0, Math.sin(Math.PI * Math.min(1, Math.max(0, (t - 0.25) / 0.5))));
+      return R * profile(rs, t) * (1 + relief * zone * Math.sin(14 * th + t * 9));
+    };
+    vx.clearRect(0, 0, w, h);
+
+    // shadow on the wheel
+    const rb = R * rs[0];
+    const g = vx.createRadialGradient(cx, base, 0, cx, base, rb * 1.8);
+    g.addColorStop(0, "rgba(0,0,0,0.55)"); g.addColorStop(1, "rgba(0,0,0,0)");
+    vx.fillStyle = g;
+    vx.beginPath(); vx.ellipse(cx, base + 4, rb * 1.8, rb * 1.8 * tilt, 0, 0, Math.PI * 2); vx.fill();
+
+    // silhouette body with lathe shading
+    const sil = [];
+    for (let i = 0; i <= 60; i++) { const t = i / 60; sil.push([R * profile(rs, t), base - t * height]); }
+    const body = vx.createLinearGradient(cx - R, 0, cx + R, 0);
+    body.addColorStop(0, "#4a2014"); body.addColorStop(0.35, "#c8693f"); body.addColorStop(0.5, "#e98a5c"); body.addColorStop(1, "#3a170e");
+    vx.fillStyle = body;
+    vx.globalAlpha = 0.28;
+    vx.beginPath();
+    sil.forEach(([r, y], i) => i ? vx.lineTo(cx + r, y) : vx.moveTo(cx + r, y));
+    for (let i = sil.length - 1; i >= 0; i--) vx.lineTo(cx - sil[i][0], sil[i][1]);
+    vx.closePath(); vx.fill();
+    vx.globalAlpha = 1;
+
+    const lw = Math.max(1, w / 420);
+    // parallels: rings around the body, back faint, front bright
+    const rings = 26;
+    for (let j = 0; j <= rings; j++) {
+      const t = j / rings, y = base - t * height;
+      for (const front of [false, true]) {
+        vx.beginPath();
+        for (let s = 0; s <= 48; s++) {
+          const phi = front ? -Math.PI / 2 + Math.PI * s / 48 : Math.PI / 2 + Math.PI * s / 48;
+          const r = radius(t, phi - rot);
+          const px = cx + r * Math.sin(phi), py = y + r * Math.cos(phi) * tilt;
+          s ? vx.lineTo(px, py) : vx.moveTo(px, py);
+        }
+        vx.strokeStyle = front ? `rgba(244,162,97,${0.35 + 0.5 * t})` : "rgba(224,122,79,0.12)";
+        vx.lineWidth = front ? lw * 1.2 : lw;
+        vx.stroke();
+      }
+    }
+    // meridians on the front half, turning with the wheel
+    const mer = 18;
+    for (let k = 0; k < mer; k++) {
+      const th = (k / mer) * Math.PI * 2, phi = th + rot;
+      const c = Math.cos(phi);
+      if (c < 0) continue;
+      vx.beginPath();
+      for (let j = 0; j <= 40; j++) {
+        const t = j / 40, y = base - t * height, r = radius(t, th);
+        const px = cx + r * Math.sin(phi), py = y + r * c * tilt;
+        j ? vx.lineTo(px, py) : vx.moveTo(px, py);
+      }
+      vx.strokeStyle = `rgba(255,214,186,${0.1 + 0.45 * c})`;
+      vx.lineWidth = lw;
+      vx.stroke();
+    }
+    // rim
+    const rr = R * rs[rs.length - 1];
+    vx.beginPath(); vx.ellipse(cx, top, rr, rr * tilt, 0, 0, Math.PI * 2);
+    vx.strokeStyle = "#ffd6ba"; vx.lineWidth = lw * 2; vx.stroke();
+
+    if (!reduced) vraf = requestAnimationFrame(drawVessel);
+  }
+
+  /* ---------- Brain Trainer: Odd One Out ---------- */
+  const pairs = [["🍏", "🍎"], ["😀", "😃"], ["🌕", "🌖"], ["🐟", "🐠"], ["⭐", "🌟"], ["🔵", "🟣"], ["🙂", "🙃"], ["🌲", "🌳"], ["🕐", "🕑"], ["🐶", "🐱"], ["🍋", "🍌"], ["❄️", "💧"]];
+  const board = document.getElementById("board"), scoreEl = document.getElementById("score");
+  let score = 0, busy = false;
+
+  function round() {
+    const size = score < 3 ? 3 : score < 7 ? 4 : 5;
+    const [same, odd] = pairs[(Math.random() * pairs.length) | 0];
+    const flip = Math.random() < 0.5;
+    const a = flip ? odd : same, b = flip ? same : odd;
+    const target = (Math.random() * size * size) | 0;
+    board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    board.innerHTML = "";
+    for (let i = 0; i < size * size; i++) {
+      const tile = document.createElement("button");
+      tile.className = "tile"; tile.type = "button";
+      tile.textContent = i === target ? b : a;
+      tile.addEventListener("click", () => {
+        if (busy) return;
+        if (i === target) {
+          busy = true; score++; scoreEl.textContent = score === 10 ? "10 🔥" : score;
+          tile.classList.add("win");
+          setTimeout(() => { busy = false; round(); }, 420);
+        } else {
+          tile.classList.remove("miss"); void tile.offsetWidth; tile.classList.add("miss");
+        }
+      });
+      board.appendChild(tile);
+    }
+  }
+  round();
+
+  /* ---------- reveal on scroll ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
